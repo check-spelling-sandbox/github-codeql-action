@@ -171,9 +171,15 @@ export async function run(
     process.env["CODEQL_ACTION_EXPECT_UPLOAD_FAILED_SARIF"] === "true" &&
     !uploadFailedSarifResult.raw_upload_size_bytes
   ) {
+    let error: string
+    if (uploadFailedSarifResult instanceof Error) {
+      error = (uploadFailedSarifResult as Error).toString();
+    } else {
+      error = JSON.stringify(uploadFailedSarifResult)
+    }
     throw new Error(
       "Expected to upload a failed SARIF file for this CodeQL code scanning run, " +
-        `but the result was instead ${uploadFailedSarifResult}.`
+        `but the result was instead ${error}.`
     );
   }
 
