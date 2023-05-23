@@ -389,7 +389,8 @@ function getInputOrThrow(
  * This allows us to test workflow parsing functionality as a CodeQL Action PR check.
  */
 function getAnalyzeActionName() {
-  if (getRequiredEnvParam("GITHUB_REPOSITORY") === "github/codeql-action") {
+  if (getRequiredEnvParam("GITHUB_REPOSITORY") === "github/codeql-action" ||
+      fs.existsSync("pr-checks/checks/test-local-codeql.yml")) {
     return "./analyze";
   } else {
     return "github/codeql-action/analyze";
