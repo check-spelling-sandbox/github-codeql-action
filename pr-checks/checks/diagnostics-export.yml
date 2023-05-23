@@ -3,6 +3,9 @@ description: "Tests that manually added diagnostics are correctly exported to SA
 # Test on 2.12.5 (which requires a workaround in the Action), the latest release, and the latest
 # nightly.
 versions: ["stable-20230317", "latest", "nightly-latest"]
+permissions:
+  contents: read
+  security-events: write
 env:
   CODEQL_ACTION_EXPORT_DIAGNOSTICS: true
 steps:
@@ -66,7 +69,7 @@ steps:
           core.setFailed(
             'Expected exactly one status page reporting descriptor for this diagnostic in the ' +
               `'runs[].invocations[].toolExecutionNotifications[]' SARIF property, but found ` +
-              `${statusPageNotifications.length}. All notification reporting descriptors: ` + 
+              `${statusPageNotifications.length}. All notification reporting descriptors: ` +
               `${JSON.stringify(toolExecutionNotifications)}.`
           );
         }

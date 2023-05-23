@@ -1,6 +1,9 @@
 name: "autobuild-action"
 description: "Tests that the C# autobuild action works"
 versions: ["latest"]
+permissions:
+  contents: read
+  security-events: write
 steps:
   - uses: ./../action/init
     with:

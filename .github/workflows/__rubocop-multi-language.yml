@@ -69,5 +69,8 @@ jobs:
     - uses: ./../action/upload-sarif
       with:
         sarif_file: rubocop.sarif
+    permissions:
+      contents: read
+      security-events: write
     env:
       CODEQL_ACTION_TEST_MODE: true

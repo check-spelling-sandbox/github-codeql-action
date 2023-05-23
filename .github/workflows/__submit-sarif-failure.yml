@@ -70,6 +70,9 @@ jobs:
       if: false
       with:
         category: /test-codeql-version:${{ matrix.version }}
+    permissions:
+      contents: read
+      security-events: write
     env:
   # Internal-only environment variable used to indicate that the post-init Action
   # should expect to upload a SARIF file for the failed run.

@@ -75,5 +75,8 @@ jobs:
           echo "Did not create a database for Ruby."
           exit 1
         fi
+    permissions:
+      contents: read
+      security-events: write
     env:
       CODEQL_ACTION_TEST_MODE: true

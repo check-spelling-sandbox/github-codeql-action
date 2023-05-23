@@ -147,5 +147,8 @@ jobs:
           echo "Did not create a database for Swift, or created it in the wrong location."
           exit 1
         fi
+    permissions:
+      contents: read
+      security-events: write
     env:
       CODEQL_ACTION_TEST_MODE: true

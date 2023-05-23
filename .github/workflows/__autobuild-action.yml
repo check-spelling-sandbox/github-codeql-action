@@ -77,5 +77,8 @@ jobs:
           echo "Did not find a C# database"
           exit 1
         fi
+    permissions:
+      contents: read
+      security-events: write
     env:
       CODEQL_ACTION_TEST_MODE: true

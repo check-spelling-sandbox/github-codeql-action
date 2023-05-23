@@ -2,6 +2,9 @@ name: "Extractor ram and threads options test"
 description: "Tests passing RAM and threads limits to extractors"
 versions: ["latest"]
 operatingSystems: ["ubuntu"]
+permissions:
+  contents: read
+  security-events: write
 steps:
   - uses: ./../action/init
     with:

@@ -3,6 +3,9 @@ description: Check that a SARIF file is submitted for the workflow run if it fai
 versions: ["latest", "cached", "nightly-latest"]
 operatingSystems: ["ubuntu"]
 
+permissions:
+  contents: read
+  security-events: write
 env:
   # Internal-only environment variable used to indicate that the post-init Action
   # should expect to upload a SARIF file for the failed run.

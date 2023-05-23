@@ -97,5 +97,8 @@ jobs:
             echo "Found notification '${rule_name}'."
           fi
         done
+    permissions:
+      contents: read
+      security-events: write
     env:
       CODEQL_ACTION_TEST_MODE: true

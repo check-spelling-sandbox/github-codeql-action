@@ -1,6 +1,9 @@
 name: "Multi-language repository"
 description: "An end-to-end integration test of a multi-language repository using automatic language detection"
 operatingSystems: ["ubuntu", "macos"]
+permissions:
+  contents: read
+  security-events: write
 steps:
   - uses: ./../action/init
     id: init

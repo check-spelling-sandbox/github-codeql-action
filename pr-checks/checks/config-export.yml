@@ -1,6 +1,9 @@
 name: "Config export"
 description: "Tests that the code scanning configuration file is exported to SARIF correctly."
 versions: ["latest", "nightly-latest"]
+permissions:
+  contents: read
+  security-events: write
 env:
   CODEQL_ACTION_EXPORT_CODE_SCANNING_CONFIG: true
   CODEQL_PASS_CONFIG_TO_CLI: true
@@ -36,13 +39,13 @@ steps:
           core.setFailed('`codeqlConfigSummary` property not found in the SARIF run property bag.');
         }
         if (configSummary.disableDefaultQueries !== false) {
-          core.setFailed('`disableDefaultQueries` property incorrect: expected false, got ' + 
+          core.setFailed('`disableDefaultQueries` property incorrect: expected false, got ' +
             `${JSON.stringify(configSummary.disableDefaultQueries)}.`);
         }
         const expectedQueries = [{ type: 'builtinSuite', uses: 'security-extended' }];
         // Use JSON.stringify to deep-equal the arrays.
         if (JSON.stringify(configSummary.queries) !== JSON.stringify(expectedQueries)) {
-          core.setFailed(`\`queries\` property incorrect: expected ${JSON.stringify(expectedQueries)}, got ` + 
+          core.setFailed(`\`queries\` property incorrect: expected ${JSON.stringify(expectedQueries)}, got ` +
             `${JSON.stringify(configSummary.queries)}.`);
         }
         core.info('Finished config export tests.');

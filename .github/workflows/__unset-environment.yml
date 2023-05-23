@@ -117,5 +117,8 @@ jobs:
             "Expected location was '${RUNNER_TEMP}/customDbLocation/python' but actual was '${PYTHON_DB}'"
           exit 1
         fi
+    permissions:
+      contents: read
+      security-events: write
     env:
       CODEQL_ACTION_TEST_MODE: true

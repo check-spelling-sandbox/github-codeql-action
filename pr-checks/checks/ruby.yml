@@ -2,6 +2,9 @@ name: "Ruby analysis"
 description: "Tests creation of a Ruby database"
 versions: ["latest", "cached", "nightly-latest"]
 operatingSystems: ["ubuntu", "macos"]
+permissions:
+  contents: read
+  security-events: write
 steps:
   - uses: ./../action/init
     with:

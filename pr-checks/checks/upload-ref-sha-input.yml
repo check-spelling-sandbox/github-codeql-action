@@ -1,5 +1,8 @@
 name: "Upload-sarif: 'ref' and 'sha' from inputs"
 description: "Checks that specifying 'ref' and 'sha' as inputs works"
+permissions:
+  contents: read
+  security-events: write
 steps:
   - uses: ./../action/init
     with:

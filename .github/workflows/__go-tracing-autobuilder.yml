@@ -95,6 +95,9 @@ jobs:
           echo "Did not find a Go database"
           exit 1
         fi
+    permissions:
+      contents: read
+      security-events: write
     env:
       DOTNET_GENERATE_ASPNET_CERTIFICATE: 'false'
       CODEQL_ACTION_TEST_MODE: true

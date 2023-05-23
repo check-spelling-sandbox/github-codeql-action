@@ -1,6 +1,9 @@
 name: "Go: tracing with autobuilder step"
 description: "Checks that Go tracing works when using an autobuilder step"
 operatingSystems: ["ubuntu", "macos"]
+permissions:
+  contents: read
+  security-events: write
 env:
   DOTNET_GENERATE_ASPNET_CERTIFICATE: "false"
 steps:

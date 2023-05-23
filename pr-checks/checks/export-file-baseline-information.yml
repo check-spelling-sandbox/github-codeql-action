@@ -1,6 +1,9 @@
 name: "Export file baseline information"
 description: "Tests that file baseline information is exported when the feature is enabled"
 versions: ["nightly-latest"]
+permissions:
+  contents: read
+  security-events: write
 steps:
   - uses: ./../action/init
     id: init

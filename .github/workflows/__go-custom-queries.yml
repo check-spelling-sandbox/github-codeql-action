@@ -100,6 +100,9 @@ jobs:
     - uses: ./../action/analyze
       with:
         upload-database: false
+    permissions:
+      contents: read
+      security-events: write
     env:
       DOTNET_GENERATE_ASPNET_CERTIFICATE: 'false'
       CODEQL_ACTION_TEST_MODE: true
