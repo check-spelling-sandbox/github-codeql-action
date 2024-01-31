@@ -6,7 +6,7 @@ Note that the only difference between `v2` and `v3` of the CodeQL Action is the 
 
 ## [UNRELEASED]
 
-No user facing changes.
+- The upload-sarif action should not fail if it can't write to the telemetry api endpoint [#2121](https://github.com/github/codeql-action/pull/2121)
 
 ## 3.24.0 - 02 Feb 2024
 
