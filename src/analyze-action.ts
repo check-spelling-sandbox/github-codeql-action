@@ -182,18 +182,15 @@ async function run() {
 
   const logger = getActionsLogger();
   try {
-    if (
-      !(await statusReport.sendStatusReport(
-        await createStatusReportBase(
-          "finish",
-          "starting",
-          startedAt,
-          await util.checkDiskUsage(logger),
-        ),
-      ))
-    ) {
-      return;
-    }
+    await statusReport.sendStatusReport(
+      await createStatusReportBase(
+        "finish",
+        "starting",
+        startedAt,
+        await util.checkDiskUsage(logger),
+      ),
+    );
+
     config = await getConfig(actionsUtil.getTemporaryDirectory(), logger);
     if (config === undefined) {
       throw new Error(
