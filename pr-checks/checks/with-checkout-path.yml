@@ -23,6 +23,7 @@ steps:
       # it's enough to test one compiled language and one interpreted language
       languages: csharp,javascript
       source-root: x/y/z/some-path/tests/multi-language-repo
+      token: ${{ secrets.CODEQL_TOKEN || github.token }}
 
   - name: Build code
     shell: bash
@@ -43,6 +44,7 @@ steps:
       ref: v1.1.0
       sha: 474bbf07f9247ffe1856c6a0f94aeeb10e7afee6
       checkout_path: x/y/z/some-path/tests/multi-language-repo
+      token: ${{ secrets.CODEQL_TOKEN || github.token }}
 
   - name: Verify SARIF after upload
     shell: bash

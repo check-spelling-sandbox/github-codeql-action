@@ -8,6 +8,7 @@ steps:
     uses: ./../action/init
     with:
       tools: ${{ steps.prepare-test.outputs.tools-url }}
+      token: ${{ secrets.CODEQL_TOKEN || github.token }}
   - uses: ./../action/.github/actions/setup-swift
     with:
       codeql-path: ${{ steps.init.outputs.codeql-path }}
@@ -17,3 +18,4 @@ steps:
   - uses: ./../action/analyze
     with:
       upload-database: false
+      token: ${{ secrets.CODEQL_TOKEN || github.token }}

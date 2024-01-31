@@ -65,6 +65,7 @@ jobs:
         languages: java
         ram: 230
         threads: 1
+        token: ${{ secrets.CODEQL_TOKEN || github.token }}
     - name: Assert Results
       shell: bash
       run: |

@@ -87,7 +87,7 @@ jobs:
         registries: |
           - url: "https://ghcr.io/v2/"
             packages: "*/*"
-            token: "${{ secrets.GITHUB_TOKEN }}"
+        token: ${{ secrets.CODEQL_TOKEN || github.token }}
 
     - name: Verify packages installed
       shell: bash

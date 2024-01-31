@@ -80,5 +80,6 @@ jobs:
     - uses: ./../action/upload-sarif
       with:
         sarif_file: rubocop.sarif
+        token: ${{ secrets.CODEQL_TOKEN || github.token }}
     env:
       CODEQL_ACTION_TEST_MODE: true
