@@ -196,22 +196,36 @@ export async function createStatusReportBase(
   cause?: string,
   exception?: string,
 ): Promise<StatusReportBase> {
+  console.log("status-reports.createStatusReportBase enter");
   const commitOid = getOptionalInput("sha") || process.env["GITHUB_SHA"] || "";
+  console.log("before getRef");
   const ref = await getRef();
+  console.log(ref);
   const jobRunUUID = process.env[EnvVar.JOB_RUN_UUID] || "";
+  console.log(jobRunUUID);
   const workflowRunID = getWorkflowRunID();
+  console.log(workflowRunID);
   const workflowRunAttempt = getWorkflowRunAttempt();
+  console.log(workflowRunAttempt);
   const workflowName = process.env["GITHUB_WORKFLOW"] || "";
+  console.log(workflowName);
   const jobName = process.env["GITHUB_JOB"] || "";
+  console.log(jobName);
+  console.log("before getAnalysisKey");
   const analysis_key = await getAnalysisKey();
+  console.log(analysis_key);
   let workflowStartedAt = process.env[EnvVar.WORKFLOW_STARTED_AT];
+  console.log(workflowStartedAt);
   if (workflowStartedAt === undefined) {
     workflowStartedAt = actionStartedAt.toISOString();
     core.exportVariable(EnvVar.WORKFLOW_STARTED_AT, workflowStartedAt);
   }
   const runnerOs = getRequiredEnvParam("RUNNER_OS");
+  console.log(runnerOs);
   const codeQlCliVersion = getCachedCodeQlVersion();
+  console.log(codeQlCliVersion);
   const actionRef = process.env["GITHUB_ACTION_REF"];
+  console.log(actionRef);
   const testingEnvironment = process.env[EnvVar.TESTING_ENVIRONMENT] || "";
   // re-export the testing environment variable so that it is available to subsequent steps,
   // even if it was only set for this step
@@ -278,7 +292,9 @@ export async function createStatusReportBase(
   if (imageVersion) {
     statusReport.runner_image_version = imageVersion;
   }
+  console.log(statusReport);
 
+  console.log("status-reports.createStatusReportBase exit");
   return statusReport;
 }
 
