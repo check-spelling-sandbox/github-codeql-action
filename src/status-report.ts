@@ -319,6 +319,15 @@ export async function sendStatusReport<S extends StatusReportBase>(
   const client = getApiClient();
 
   try {
+    console.log(
+      "await client.request",
+      "PUT /repos/:owner/:repo/code-scanning/analysis/status",
+      {
+        owner,
+        repo,
+        data: statusReportJSON,
+      },
+    );
     await client.request(
       "PUT /repos/:owner/:repo/code-scanning/analysis/status",
       {

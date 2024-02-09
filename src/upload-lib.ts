@@ -113,6 +113,15 @@ async function uploadPayload(
   const client = api.getApiClient();
 
   try {
+    console.log(
+      "await client.request",
+      "PUT /repos/:owner/:repo/code-scanning/analysis",
+      {
+        owner: repositoryNwo.owner,
+        repo: repositoryNwo.repo,
+        data: payload,
+      },
+    );
     const response = await client.request(
       "PUT /repos/:owner/:repo/code-scanning/analysis",
       {
@@ -478,6 +487,15 @@ export async function waitForProcessing(
       }
       let response: OctokitResponse<any> | undefined = undefined;
       try {
+        console.log(
+          "await client.request",
+          "GET /repos/:owner/:repo/code-scanning/sarifs/:sarif_id",
+          {
+            owner: repositoryNwo.owner,
+            repo: repositoryNwo.repo,
+            sarif_id: sarifID,
+          },
+        );
         response = await client.request(
           "GET /repos/:owner/:repo/code-scanning/sarifs/:sarif_id",
           {
