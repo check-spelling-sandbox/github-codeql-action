@@ -300,6 +300,7 @@ async function run() {
         try {
           await installPythonDeps(codeql, logger);
         } catch (unwrappedError) {
+          console.error(unwrappedError);
           const error = wrapError(unwrappedError);
           logger.warning(
             `${error.message} You can call this action with 'setup-python-dependencies: false' to disable this process`,
@@ -308,6 +309,7 @@ async function run() {
       }
     }
   } catch (unwrappedError) {
+    console.error(unwrappedError);
     const error = wrapError(unwrappedError);
     core.setFailed(error.message);
     await sendStatusReport(
@@ -492,6 +494,7 @@ async function run() {
 
     core.setOutput("codeql-path", config.codeQLCmd);
   } catch (unwrappedError) {
+    console.error(unwrappedError);
     const error = wrapError(unwrappedError);
     core.setFailed(error.message);
     await sendCompletedStatusReport(

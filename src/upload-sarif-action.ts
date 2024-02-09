@@ -81,6 +81,7 @@ async function run() {
     }
     await sendSuccessStatusReport(startedAt, uploadResult.statusReport);
   } catch (unwrappedError) {
+    console.error(unwrappedError);
     const error = wrapError(unwrappedError);
     const message = error.message;
     core.setFailed(message);

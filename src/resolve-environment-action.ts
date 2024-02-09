@@ -61,6 +61,7 @@ async function run() {
     );
     core.setOutput(ENVIRONMENT_OUTPUT_NAME, result);
   } catch (unwrappedError) {
+    console.error(unwrappedError);
     const error = wrapError(unwrappedError);
 
     if (error instanceof CommandInvocationError) {

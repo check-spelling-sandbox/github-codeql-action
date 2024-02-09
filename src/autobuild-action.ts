@@ -102,6 +102,7 @@ async function run() {
       }
     }
   } catch (unwrappedError) {
+    console.error(unwrappedError);
     const error = wrapError(unwrappedError);
     core.setFailed(
       `We were unable to automatically build your code. Please replace the call to the autobuild action with your custom build steps. ${error.message}`,

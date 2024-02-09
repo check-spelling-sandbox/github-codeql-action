@@ -60,6 +60,7 @@ async function runWrapper() {
       logger,
     );
   } catch (unwrappedError) {
+    console.error(unwrappedError);
     const error = wrapError(unwrappedError);
     core.setFailed(error.message);
 

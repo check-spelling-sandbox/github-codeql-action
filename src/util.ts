@@ -119,6 +119,7 @@ export function getExtraOptionsEnvParam(): object {
   try {
     return JSON.parse(raw);
   } catch (unwrappedError) {
+    console.error(unwrappedError);
     const error = wrapError(unwrappedError);
     throw new ConfigurationError(
       `${varName} environment variable is set, but does not contain valid JSON: ${error.message}`,
