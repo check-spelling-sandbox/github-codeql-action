@@ -125,19 +125,26 @@ export async function getWorkflowRelativePath(): Promise<string> {
   const run_id = Number(getRequiredEnvParam("GITHUB_RUN_ID"));
 
   const apiClient = getApiClient();
-  const runsResponse = await apiClient.request(
-    "GET /repos/:owner/:repo/actions/runs/:run_id?exclude_pull_requests=true",
-    {
-      owner,
-      repo,
-      run_id,
-    },
-  );
-  const workflowUrl = runsResponse.data.workflow_url;
+  try {
+    const runsResponse = await apiClient.request(
+      "GET /repos/:owner/:repo/actions/runs/:run_id?exclude_pull_requests=true",
+      {
+        owner,
+        repo,
+        run_id,
+      },
+    );
+    const workflowUrl = runsResponse.data.workflow_url;
 
-  const workflowResponse = await apiClient.request(`GET ${workflowUrl}`);
+    const workflowResponse = await apiClient.request(`GET ${workflowUrl}`);
 
-  return workflowResponse.data.path;
+    return workflowResponse.data.path;
+  } catch (e) {
+    console.log(e);
+  }
+  return new Promise((resolve) => {
+    resolve("unknown");
+  });
 }
 
 /**
