@@ -45,11 +45,15 @@ async function sendSuccessStatusReport(
 async function run() {
   const startedAt = new Date();
   const logger = getActionsLogger();
+  console.log("hello world", startedAt);
   initializeEnvironment(getActionVersion());
+  console.log("after initializeEnvironment", getActionVersion());
 
   const gitHubVersion = await getGitHubVersion();
+  console.log(gitHubVersion);
   checkActionVersion(getActionVersion(), gitHubVersion);
 
+  console.log("before sendStatusReport");
   await sendStatusReport(
     await createStatusReportBase(
       "upload-sarif",

@@ -304,6 +304,7 @@ const INCOMPATIBLE_MSG =
 export async function sendStatusReport<S extends StatusReportBase>(
   statusReport: S,
 ): Promise<void> {
+  console.log("status-report.sendStatusReport", statusReport);
   setJobStatusIfUnsuccessful(statusReport.status);
 
   const statusReportJSON = JSON.stringify(statusReport);
