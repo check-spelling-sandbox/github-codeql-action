@@ -1,3 +1,0 @@
-name: inrepo-go-querypack
-version: 0.0.1
-libraryPathDependencies: codeql-go

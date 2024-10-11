@@ -1,7 +1,0 @@
-name: Pack testing in the CodeQL Action
-
-disable-default-queries: true
-packs:
-  javascript:
-    - codeql-testing/private-pack
-    - codeql-testing/codeql-pack1
