@@ -26,6 +26,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install
+        run: npm install
+
       - name: Lint
         id: lint
         run: npm run-script lint-ci
@@ -51,6 +54,16 @@ jobs:
           # However we're not checking in the updated lockfile here, so it's fine to run
           # `npm install` on Linux.
           npm install
+
+          (
+            echo '*/*-action.js';
+            echo '*/*-action-post.js'
+          ) >> .gitignore
+          for action in $(
+            find * -mindepth 1 -maxdepth 1 -type f -name action.yml
+          ); do
+            git rm -f "$(dirname "$action")"/*-action*.js
+          done
 
           if [ ! -z "$(git status --porcelain)" ]; then
             git config --global user.email "github-actions@github.com"
@@ -112,6 +125,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: npm install
+        run: |
+          npm ci
+      - name: Build
+        run: |
+          npm run build
       - name: npm test
         run: |
           # Run any commands referenced in package.json using Bash, otherwise
