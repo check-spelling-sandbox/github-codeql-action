@@ -1,0 +1,30 @@
+name: 'Upload a Build Artifact v3 (limited features)'
+description: 'Upload a build artifact that can be used by subsequent workflow steps'
+author: 'GitHub'
+inputs:
+  name:
+    description: .
+    default: 'artifact'
+  path:
+    description: .
+    required: true
+  retention-days:
+    description: .
+
+outputs:
+  artifact-id:
+    description: .
+    value: ${{ steps.upload.outputs.artifact-id }}
+  artifact-url:
+    description: .
+    value: ${{ steps.upload.outputs.artifact-url }}
+runs:
+  using: composite
+  steps:
+  - name: Upload v3
+    id: upload
+    uses: actions/upload-artifact@v3
+    with:
+      name: ${{ inputs.name }}
+      path: ${{ inputs.path }}
+      description: ${{ inputs.description }}

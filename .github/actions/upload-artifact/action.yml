@@ -1,0 +1,46 @@
+name: 'Upload a Build Artifact (limited features)'
+description: 'Upload a build artifact that can be used by subsequent workflow steps'
+author: 'GitHub'
+inputs:
+  name:
+    description: .
+    default: 'artifact'
+  path:
+    description: .
+    required: true
+  retention-days:
+    description: .
+
+outputs:
+  artifact-id:
+    description: .
+    value: ${{ steps.v4.outputs.artifact-id || steps.v3.outputs.artifact-id }}
+  artifact-url:
+    description: .
+    value: ${{ steps.v4.outputs.artifact-url || steps.v3.outputs.artifact-url }}
+runs:
+  using: composite
+  steps:
+  - name: Select action
+    id: select-action
+    shell: bash
+    run: |
+      if [ "$GITHUB_SERVER_URL" == "https://github.com" ]; then
+        echo "has-v4=1" >> "$GITHUB_OUTPUT"
+      fi
+  - name: Upload v3
+    id: v3
+    if: ${{ !steps.select-action.outputs.has-v4 }}
+    uses: ./.github/actions/upload-artifact/v3
+    with:
+      name: ${{ inputs.name }}
+      path: ${{ inputs.path }}
+      description: ${{ inputs.description }}
+  - name: Upload v4
+    id: v4
+    if: steps.select-action.outputs.has-v4
+    uses: ./.github/actions/upload-artifact/v4
+    with:
+      name: ${{ inputs.name }}
+      path: ${{ inputs.path }}
+      description: ${{ inputs.description }}

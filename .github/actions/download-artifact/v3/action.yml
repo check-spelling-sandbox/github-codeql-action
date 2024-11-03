@@ -1,0 +1,8 @@
+name: 'Download a Build Artifact v3 (limited features)'
+description: 'Download a build artifact that was previously uploaded in the workflow by the upload-artifact action'
+author: 'GitHub'
+runs:
+  using: composite
+  steps:
+  - name: Download v4
+    uses: actions/download-artifact@v3

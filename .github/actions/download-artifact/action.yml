@@ -1,0 +1,21 @@
+name: 'Download a Build Artifact (limited features)'
+description: 'Download a build artifact that was previously uploaded in the workflow by the upload-artifact action'
+author: 'GitHub'
+runs:
+  using: composite
+  steps:
+  - name: Select action
+    id: select-action
+    shell: bash
+    run: |
+      if [ "$GITHUB_SERVER_URL" == "https://github.com" ]; then
+        echo "has-v4=1" >> "$GITHUB_OUTPUT"
+      fi
+  - name: Download v3
+    id: v3
+    if: ${{ !steps.select-action.outputs.has-v4 }}
+    uses: ./.github/actions/download-artifact/v3
+  - name: Download v4
+    id: v4
+    if: steps.select-action.outputs.has-v4
+    uses: ./.github/actions/download-artifact/v4

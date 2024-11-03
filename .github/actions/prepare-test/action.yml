@@ -26,6 +26,8 @@ runs:
         mv * .github ../action/
         mv ../action/tests/multi-language-repo/{*,.github} .
         mv ../action/.github/workflows .github
+        mkdir .github/actions
+        mv ../action/.github/actions/*artifact .github/actions
     - id: get-url
       name: Determine URL
       shell: bash
