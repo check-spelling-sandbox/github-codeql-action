@@ -26,11 +26,12 @@ export default [
   {
     ignores: [
       "**/webpack.config.js",
-      "lib/**/*",
       "src/testdata/**/*",
       "tests/**/*",
       "eslint.config.mjs",
       ".github/**/*",
+      "*/*-action.js",
+      "*/*-action-post.js",
     ],
   },
   ...fixupConfigRules(
