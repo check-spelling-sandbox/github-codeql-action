@@ -27,5 +27,5 @@ outputs:
     description: A stringified JSON array of objects containing the types and URLs of the configured registries.
 runs:
   using: node20
-  main: "../lib/start-proxy-action.js"
-  post: "../lib/start-proxy-action-post.js"
+  main: "start-proxy-action.js"
+  post: "start-proxy-action-post.js"

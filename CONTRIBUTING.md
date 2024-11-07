@@ -17,19 +17,13 @@ Before you start, ensure that you have a recent version of node (16 or higher) i
 
 ### Common tasks
 
-* Transpile the TypeScript to JavaScript: `npm run build`.  Note that the JavaScript files are committed to git.
-* Run tests: `npm run test`.  You’ll need to ensure that the JavaScript files are up-to-date first by running the command above.
-* Run the linter: `npm run lint`.
+* Transpile the TypeScript to JavaScript: `npm run build`.  Note that the bundled action files are committed to git.
+* Run tests: `npm run test`.  You’ll need to ensure that the `node_modules` are available and JavaScript files are up-to-date first by running the commands above.
+* Run the linter: `npm run lint` (requires the first command).
 
 This project also includes configuration to run tests from VSCode (with support for breakpoints) - open the test file you wish to run and choose "Debug AVA test file" from the Run menu in the Run panel.
 
 You may want to run `tsc --watch` from the command line or inside of vscode in order to ensure build artifacts are up to date as you are working.
-
-### Checking in compiled artifacts and `node_modules`
-
-Because CodeQL Action users consume the code directly from this repository, and there can be no build step during a GitHub Actions run, this repository contains all compiled artifacts and node modules. There is a PR check that will fail if any of the compiled artifacts are not up to date. Compiled artifacts are stored in the `lib/` directory. For all day-to-day development purposes, this folder can be ignored.
-
-Only run `npm install` if you are explicitly changing the set of dependencies in `package.json`. The `node_modules` directory should be up to date when you check out, but if for some reason, there is an inconsistency use `npm ci && npm run removeNPMAbsolutePaths` to ensure the directory is in a state consistent with the `package-lock.json`. Note that due to a macOS-specific dependency, this command should be run on a macOS machine. There is a PR check to ensure the consistency of the `node_modules` directory.
 
 ### Running the action
 
@@ -62,7 +56,7 @@ Here are a few things you can do that will increase the likelihood of your pull 
 
     You can start a release by triggering this workflow via [workflow dispatch](https://github.com/github/codeql-action/actions/workflows/update-release-branch.yml).
 1. The workflow run will open a pull request titled "Merge main into releases/v3". Follow the steps on the checklist in the pull request. Once you've checked off all but the last two of these, approve the PR and automerge it.
-1. When the "Merge main into releases/v3" pull request is merged into the `releases/v3` branch, a mergeback pull request to `main` will be automatically created. This mergeback pull request incorporates the changelog updates into `main`, tags the release using the merge commit of the "Merge main into releases/v3" pull request, and bumps the patch version of the CodeQL Action. 
+1. When the "Merge main into releases/v3" pull request is merged into the `releases/v3` branch, a mergeback pull request to `main` will be automatically created. This mergeback pull request incorporates the changelog updates into `main`, tags the release using the merge commit of the "Merge main into releases/v3" pull request, and bumps the patch version of the CodeQL Action.
 1. If a backport to an older major version is required, a pull request targeting that version's branch will also be automatically created.
 1. Approve the mergeback and backport pull request (if applicable) and automerge them.
 
